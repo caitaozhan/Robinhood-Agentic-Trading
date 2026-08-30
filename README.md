@@ -1,7 +1,8 @@
 # Agentic Trading
 
-This repository defines the policies and operating instructions for an autonomous <a href="https://robinhood.com/us/en/agentic-trading/" target="_blank">Robinhood trading agent</a>. The agent pursues speculative short-term opportunities in a restricted set of common stocks while using only
-unleveraged buying power.
+This repository defines the policies and operating instructions for an autonomous
+[Robinhood trading agent](https://robinhood.com/us/en/agentic-trading/). The agent pursues speculative short-term
+opportunities in a restricted set of common stocks while using only unleveraged buying power.
 
 ## Repository structure
 
