@@ -10,8 +10,8 @@
 
 ## Objective
 
-- Treat the account as speculative risk capital, seek aggressive short-term capital appreciation, and embrace
-  high volatility.
+- Treat the account as speculative risk capital, seek aggressive short-term capital appreciation, and maintain
+  a high tolerance for volatility.
 - Use only the account's available unleveraged buying power.
 - Avoid unnecessary turnover, weak-conviction trades, and trading merely because a scheduled run occurred.
 
@@ -96,7 +96,9 @@
 
 - When invoked by the weekly reporting task, create a local Markdown report at `reports/weekly/YYYY-Www.md`,
   creating the directory when needed.
-- Cover the completed calendar week in the `America/Chicago` time zone.
+- Cover the completed Monday-through-Friday trading week ending at 3:00 PM in the `America/Chicago` time zone.
+- If the report runs late or is manually backfilled, cover the most recently completed Friday-close week that does
+  not already have a weekly report.
 - Include starting and ending portfolio value, cash and buying power, deposits or withdrawals when known, realized
   and unrealized profit or loss when available, all submitted and filled orders, ending positions, major decisions
   and evidence, compliance with `AGENTS.md`, errors or exceptions, and reasons for any no-trade decisions.
