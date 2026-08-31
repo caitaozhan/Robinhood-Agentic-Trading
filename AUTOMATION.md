@@ -52,8 +52,8 @@
   eligible equity orders that comply fully with `AGENTS.md`.
 - Do not call `review_equity_order` for a fully compliant order.
 - Before direct placement, complete every independent preflight check required by `AGENTS.md` and `STRATEGY.md`.
-- Reconcile the proposed order against open orders, recent fills, and the latest run report to prevent duplicate
-  or substantially overlapping exposure.
+- Reconcile the proposed order against open orders, recent fills, and the latest run report across the weekly
+  subfolders under `reports/runs/` to prevent duplicate or substantially overlapping exposure.
 - Use a fresh idempotency key for each new logical order. Reuse it only for an identical retry.
 - Sell only shares currently owned and available.
 - Do not autonomously cancel or replace an order if the connected tool requires separate confirmation that the
@@ -62,8 +62,8 @@
 ## Verification and reporting
 
 - After any order submission, verify the resulting order and updated account state.
-- At the end of every authorized in-window cycle, create a Markdown report under `reports/runs/` using the
-  America/Chicago timestamp.
+- At the end of every authorized in-window cycle, create a Markdown report under the ISO week folder
+  `reports/runs/YYYY-Www/` using the America/Chicago timestamp.
 - Include evidence, decisions, order results, positions, buying power, and reasons for no action.
 - Mask account identifiers except for the final four digits.
 - Return a concise summary and the report's absolute local path.

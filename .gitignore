@@ -1,2 +1,2 @@
-reports/runs/*.md
+reports/runs/**/*.md
 *.code-workspace

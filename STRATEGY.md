@@ -84,7 +84,8 @@
 ### Per-run report
 
 - At the end of every authorized in-window monitoring run, create a local Markdown report at
-  `reports/runs/YYYY-MM-DD_HHMM_CT.md`, creating the directory when needed.
+  `reports/runs/YYYY-Www/YYYY-MM-DD_HHMM_CT.md`, where `YYYY-Www` is the ISO week of the America/Chicago run
+  date, creating the weekly directory when needed.
 - Do not create a report for an invocation outside the authorized time window described in `AUTOMATION.md`.
 - Include the evidence considered, current thesis, decisions made, orders submitted or changed, resulting order
   states, positions, remaining buying power, and reasons for taking no action when applicable.
@@ -96,6 +97,7 @@
 
 - When invoked by the weekly reporting task, create a local Markdown report at `reports/weekly/YYYY-Www.md`,
   creating the directory when needed.
+- Read the corresponding per-run reports recursively from `reports/runs/YYYY-Www/`.
 - Cover the completed Monday-through-Friday trading week ending at 3:00 PM in the `America/Chicago` time zone.
 - If the report runs late or is manually backfilled, cover the most recently completed Friday-close week that does
   not already have a weekly report.
