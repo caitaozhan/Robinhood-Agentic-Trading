@@ -1,4 +1,4 @@
-# 30-Minute Robinhood Agentic Trading
+# Hourly Robinhood Agentic Trading with Opening Check
 
 ## Required inputs and precedence
 
@@ -15,9 +15,15 @@
 
 ## Time and market gate
 
-- The task is scheduled every 30 minutes on weekdays from 8:30 AM through 2:30 PM America/Chicago.
+- The task is scheduled on weekdays at 8:30 AM, 9:00 AM, and hourly from 9:30 AM through 2:30 PM
+  America/Chicago.
 - At the very start, check the current America/Chicago time before creating a lock or writing any file.
+- A cycle may start only within 10 minutes of its scheduled time. Treat the most recent scheduled time at or before
+  invocation as that cycle's scheduled time.
+- If a cycle starts more than 10 minutes late, treat it as a missed cycle and exit immediately. Do not access the
+  brokerage or market data, acquire the monitor lock, create a run report, or update automation memory.
 - If invoked before 8:30 AM or after 2:59 PM, including because a run was delayed or queued, exit immediately.
+- For the first daily run, do not place an order until the 8:30–8:35 AM regular-session bar is complete.
 - For an out-of-window invocation, do not access brokerage or market data, acquire the monitor lock, create a run
   report, or update automation memory. Never create an out-of-window file under `reports/runs/`.
 - On market holidays or when the regular market is closed during the authorized window, do not access the
@@ -26,7 +32,7 @@
 ## Overlap guard
 
 - During the authorized window, use an atomic local lock at `reports/.monitor-lock`.
-- If the lock already exists and is less than 30 minutes old, do not access the brokerage or place an order.
+- If the lock already exists and is less than 45 minutes old, do not access the brokerage or place an order.
   Write the required in-window report stating that an overlapping run was skipped, then exit.
 - Treat an older lock as stale.
 - Hold the lock for the full cycle and remove it at the end when possible, including after a no-trade decision.
