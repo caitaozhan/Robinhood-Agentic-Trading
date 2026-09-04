@@ -58,6 +58,10 @@
   eligible equity orders that comply fully with `AGENTS.md`.
 - Do not call `review_equity_order` for a fully compliant order.
 - Before direct placement, complete every independent preflight check required by `AGENTS.md` and `STRATEGY.md`.
+- For an immediate breakout or momentum entry, use a share-based regular-hours market buy after passing the fresh
+  quote, spread, displayed-liquidity, maximum-entry, and buying-power-buffer checks in `STRATEGY.md`.
+- Do not submit an unattended resting buy limit unless autonomous cancellation and the required expiration can be
+  verified before submission. If they cannot be verified, wait for a later cycle to observe the desired price.
 - Reconcile the proposed order against open orders, recent fills, and the latest run report across the weekly
   subfolders under `reports/runs/` to prevent duplicate or substantially overlapping exposure.
 - Use a fresh idempotency key for each new logical order. Reuse it only for an identical retry.

@@ -66,6 +66,19 @@
   order after a transient failure.
 - The periodic monitoring task may place orders only during regular U.S. equity-market hours. Do not place
   pre-market, post-market, overnight, or all-day-hours orders from that task.
+- When the thesis calls for immediate participation in a confirmed breakout or momentum setup, use a share-based
+  regular-hours market buy rather than a resting buy limit.
+- Immediately before a market buy, require a quote no more than 30 seconds old, a bid-ask spread no wider than
+  0.25% of the midpoint, and displayed liquidity sufficient for the intended share quantity. Otherwise, do not
+  trade.
+- Size a market buy so its estimated cost at the current ask plus a 2% price buffer does not exceed available
+  unleveraged buying power.
+- If the live price moves beyond the thesis's maximum acceptable entry during final preflight, skip the trade. Do
+  not convert a missed immediate entry into a resting pullback order or automatically chase it at a higher price.
+- For a pullback thesis, wait until a scheduled run observes and validates the pullback before buying. Do not place
+  an unattended resting buy limit unless autonomous cancellation is verified before submission and the order can
+  be canceled after 15 minutes or at the next scheduled cycle, whichever comes first. If either condition cannot
+  be enforced, do not submit the resting order.
 - Sell only shares currently owned and available for sale.
 - After submitting, canceling, or replacing an order, verify the resulting order state and updated account state.
 - If a connected tool requires a separate confirmation that has not been explicitly bypassed, do not perform that
