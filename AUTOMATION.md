@@ -15,19 +15,25 @@
 
 ## Time and market gate
 
-- The task is scheduled on weekdays at 8:30 AM, 9:00 AM, and hourly from 9:30 AM through 2:30 PM
+- The task is scheduled on weekdays at 8:29 AM, 9:00 AM, and hourly from 9:30 AM through 2:30 PM
   America/Chicago.
 - At the very start, check the current America/Chicago time before creating a lock or writing any file.
 - A cycle may start only within 10 minutes of its scheduled time. Treat the most recent scheduled time at or before
   invocation as that cycle's scheduled time.
 - If a cycle starts more than 10 minutes late, treat it as a missed cycle and exit immediately. Do not access the
   brokerage or market data, acquire the monitor lock, create a run report, or update automation memory.
-- If invoked before 8:30 AM or after 2:59 PM, including because a run was delayed or queued, exit immediately.
-- For the first daily run, do not place an order until the 8:30–8:35 AM regular-session bar is complete.
+- If invoked before 8:29 AM or after 2:59 PM, including because a run was delayed or queued, exit immediately.
+- The 8:29 AM cycle may use read-only brokerage and market-data tools to reconcile the account, review permitted
+  equities, and prepare a provisional thesis before the regular session opens. Do not submit, cancel, replace,
+  review, or preview an order before 8:30 AM.
+- At or after 8:30 AM, verify that the regular session is open and refresh the positions, open orders, recent
+  trades, unleveraged buying power, issuer and ticker, tradability, quote, spread, and displayed liquidity before
+  taking any trading action. Do not rely on the pre-open values for order preflight.
 - For an out-of-window invocation, do not access brokerage or market data, acquire the monitor lock, create a run
   report, or update automation memory. Never create an out-of-window file under `reports/runs/`.
-- On market holidays or when the regular market is closed during the authorized window, do not access the
-  brokerage or trade. Write the normal in-window no-action report.
+- On known market holidays, do not access the brokerage or trade. If the regular session does not open after the
+  8:29 AM preparation period or is otherwise closed during the authorized window, do not trade. Write the normal
+  in-window no-action report.
 
 ## Overlap guard
 
@@ -74,6 +80,7 @@
 - After any order submission, verify the resulting order and updated account state.
 - At the end of every authorized in-window cycle, create a Markdown report under the ISO week folder
   `reports/runs/YYYY-Www/` using the America/Chicago timestamp.
-- Include evidence, decisions, order results, positions, buying power, and reasons for no action.
+- Follow the concise per-run report format and length targets in `STRATEGY.md`. Include decision-critical evidence,
+  order results, positions, open orders, buying power, and reasons for no action without repeating unchanged facts.
 - Mask account identifiers except for the final four digits.
 - Return a concise summary and the report's absolute local path.

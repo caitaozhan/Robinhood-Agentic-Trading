@@ -68,7 +68,7 @@
   pre-market, post-market, overnight, or all-day-hours orders from that task.
 - When the thesis calls for immediate participation in a confirmed breakout or momentum setup, use a share-based
   regular-hours market buy rather than a resting buy limit.
-- Immediately before a market buy, require a quote no more than 30 seconds old, a bid-ask spread no wider than
+- Immediately before a market buy, require a quote no more than 10 seconds old, a bid-ask spread no wider than
   0.25% of the midpoint, and displayed liquidity sufficient for the intended share quantity. Otherwise, do not
   trade.
 - Size a market buy so its estimated cost at the current ask plus a 2% price buffer does not exceed available
@@ -100,10 +100,16 @@
   `reports/runs/YYYY-Www/YYYY-MM-DD_HHMM_CT.md`, where `YYYY-Www` is the ISO week of the America/Chicago run
   date, creating the weekly directory when needed.
 - Do not create a report for an invocation outside the authorized time window described in `AUTOMATION.md`.
-- Include the evidence considered, current thesis, decisions made, orders submitted or changed, resulting order
-  states, positions, remaining buying power, and reasons for taking no action when applicable.
-- Include timestamps and links or citations for material external evidence. Mask account numbers except for the
-  final four digits.
+- Keep routine no-action reports under 350 words and reports involving an order, material error, or exception under
+  500 words when the required facts can be stated accurately within that limit.
+- Use only the sections `Outcome`, `Account`, `Evidence and decision`, and `Orders and next check`. Prefer one
+  compact table for permitted-equity comparisons and avoid repeating unchanged starting and ending state.
+- Include the current thesis, decision, positions, open orders, remaining buying power, order results, and the
+  reason for taking no action when applicable. Include only evidence material to the decision or required preflight.
+- State compliance in one concise sentence. Do not repeat the governing rules, list every prohibited asset, name
+  every tool called, or restate the same evidence in multiple sections.
+- Include timestamps and links or citations only for material external evidence. Mask account numbers except for
+  the final four digits.
 - Return a concise copy of the report in the Codex task result and provide the local report path.
 
 ### Weekly report
@@ -119,6 +125,15 @@
   and evidence, compliance with `AGENTS.md`, errors or exceptions, and reasons for any no-trade decisions.
 - Distinguish investment performance from deposits, withdrawals, and other cash flows. If the available data
   cannot support a reliable performance calculation, state that clearly instead of estimating.
+- Add a brief `Nasdaq comparison` section using the Nasdaq Composite Index as the benchmark. Compare the account's
+  cash-flow-adjusted return with the index's price return over matching verified start and end timestamps, and show
+  both returns, the percentage-point difference, the index levels, timestamps, and a citation for the index data.
+- If the account beat the Nasdaq Composite, label the relative result as good and briefly identify the main source
+  of outperformance. If it did not, explain the evidence-supported causes and give one to three specific suggestions
+  for improving selection, entry timing, position sizing, exits, or cash deployment in future weeks.
+- Keep the Nasdaq comparison concise, preferably under 150 words. If either return cannot be calculated reliably,
+  state why and do not estimate. Benchmarking is analysis only and does not authorize trading the index, an ETF,
+  or any company outside `AGENTS.md`.
 - Summarize what worked, what did not, current risks, and the evidence the next run should reassess. Do not weaken
   `AGENTS.md` or authorize new instruments or companies in a report.
 - Return a concise weekly summary in the Codex task result and provide the local report path.
